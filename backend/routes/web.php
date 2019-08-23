@@ -16,3 +16,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'funcionarios'], function() use ($router) {
+
+    $router->get('/', ['uses' => 'FuncionarioController@showAll']);
+
+});

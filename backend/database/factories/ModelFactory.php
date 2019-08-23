@@ -11,9 +11,22 @@
 |
 */
 
+/** @var Illuminate\Database\Eloquent\Factory $factory */
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name'  => $faker->name,
         'email' => $faker->email,
+    ];
+});
+
+$factory->define(App\Models\Funcionario::class, function (Faker\Generator $faker) {
+    return [
+        'nome_completo'   => $faker->name,
+        'email'          => $faker->unique()->email,
+        'cpf'            => (string) $faker->unique()->cpf(false),
+        'data_nascimento' => $faker->dateTimeBetween('-18 years')->format('Y-m-d'),
+        'linkedin'       => $faker->url,
+        'anotacoes'      => $faker->text(),
     ];
 });

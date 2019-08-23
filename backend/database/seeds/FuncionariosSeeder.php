@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Funcionario;
 
-class DatabaseSeeder extends Seeder
+class FuncionariosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call('FuncionariosSeeder');
+        factory(Funcionario::class, 50)->create();
     }
 }
