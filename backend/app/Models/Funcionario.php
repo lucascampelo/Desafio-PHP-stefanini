@@ -12,14 +12,15 @@ class Funcionario extends Model
      * @var array
      */
     protected $fillable = [
-        'nomeCompleto',
+        'nome_completo',
         'email',
         'cpf',
+        'data_nascimento',
         'linkedin',
         'anotacoes',
     ];
 
     protected $dates = [
-        'dataNascimento'
+        'data_nascimento'
     ];
 }

@@ -3,25 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Funcionario;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FuncionarioController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Lista todos os Funcionários
      */
-    public function __construct()
-    {
-        //
-    }
-
     public function showAll()
     {
+        // Lista tudo sem paginação
         return Funcionario::all();
     }
 
+    /**
+     * Busca por um funcionário e mostra as informações do mesmo
+     *
+     * @param int $id ID do Funcionário no banco de dados
+     *
+     * @return Funcionario
+     */
     public function show($id = null)
     {
         if (empty($id)) {
@@ -29,12 +33,35 @@ class FuncionarioController extends Controller
         }
 
         try {
+            /** @var Funcionario $funcionario */
             $funcionario = Funcionario::findOrFail($id);
             return $funcionario;
         } catch (ModelNotFoundException $e) {
             throw new NotFoundHttpException("Funcionário não encontrado", $e, 404);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException("Um erro inexperado ocorreu. Tente novamente mais tarde.");
         }
+    }
+
+    /**
+     * Cria um novo Funcionário no Sistema
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws ValidationException
+     */
+    public function create(Request $request)
+    {
+        // Valida a requisição, e já mostra os erros se houverem (HttpCode: 422)
+        $this->validate($request, [
+            'nome_completo'   => 'required',
+            'email'           => 'email|unique:funcionarios',
+            'cpf'             => 'unique:funcionarios',
+            'data_nascimento' => 'date',
+            'linkedin'        => 'url',
+        ]);
+
+        /** @var Funcionario $funcionario */
+        $funcionario = Funcionario::create($request->all());
+
+        return response()->json($funcionario, 201);
     }
 }

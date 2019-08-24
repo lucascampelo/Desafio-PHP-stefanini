@@ -15,12 +15,12 @@ class Funcionarios extends Migration
     {
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
-            $table->string('nome_completo')->nullable(false);
-            $table->string('email')->unique();
-            $table->string('cpf', 11)->unique()->nullable(false);
-            $table->date('data_nascimento');
-            $table->string('linkedin');
-            $table->text('anotacoes');
+            $table->string('nome_completo');
+            $table->string('email')->unique()->nullable();
+            $table->string('cpf', 11)->unique();
+            $table->date('data_nascimento')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->text('anotacoes')->nullable();
             $table->timestamps();
         });
     }
