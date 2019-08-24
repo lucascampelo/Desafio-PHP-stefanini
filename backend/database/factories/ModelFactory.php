@@ -26,8 +26,18 @@ $factory->define(App\Models\Funcionario::class, function (Faker\Generator $faker
         'sexo'            => $faker->randomElement(['f', 'm']),
         'email'           => $faker->unique()->email,
         'cpf'             => (string)$faker->unique()->cpf(false),
-        'data_nascimento' => $faker->dateTimeBetween('-18 years')->format('Y-m-d'),
+        'data_nascimento' => $faker->dateTimeBetween('-45 years', '-18 years')->format('Y-m-d'),
         'linkedin'        => $faker->url,
         'anotacoes'       => $faker->text(),
+    ];
+});
+
+$factory->define(App\Models\Dependente::class, function (Faker\Generator $faker) {
+    return [
+        'nome_completo'   => $faker->name,
+        'sexo'            => $faker->randomElement(['f', 'm']),
+        'cpf'             => (string)$faker->unique()->cpf(false),
+        'data_nascimento' => $faker->dateTimeBetween('-18 years')->format('Y-m-d'),
+        'anotacoes'       => $faker->boolean(20) ? $faker->text() : null,
     ];
 });
