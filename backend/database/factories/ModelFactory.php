@@ -23,10 +23,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Funcionario::class, function (Faker\Generator $faker) {
     return [
         'nome_completo'   => $faker->name,
-        'email'          => $faker->unique()->email,
-        'cpf'            => (string) $faker->unique()->cpf(false),
+        'sexo'            => $faker->randomElement(['f', 'm']),
+        'email'           => $faker->unique()->email,
+        'cpf'             => (string)$faker->unique()->cpf(false),
         'data_nascimento' => $faker->dateTimeBetween('-18 years')->format('Y-m-d'),
-        'linkedin'       => $faker->url,
-        'anotacoes'      => $faker->text(),
+        'linkedin'        => $faker->url,
+        'anotacoes'       => $faker->text(),
     ];
 });

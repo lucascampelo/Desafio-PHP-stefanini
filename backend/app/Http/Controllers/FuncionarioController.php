@@ -55,6 +55,7 @@ class FuncionarioController extends Controller
         // Valida a requisição, e já mostra os erros se houverem (HttpCode: 422)
         $this->validate($request, [
             'nome_completo'   => 'required',
+            'sexo'            => 'required|in:f,m',
             'email'           => 'email|unique:funcionarios',
             'cpf'             => 'unique:funcionarios',
             'data_nascimento' => 'date',
@@ -94,6 +95,17 @@ class FuncionarioController extends Controller
     public function update($id = null, Request $request)
     {
         $funcionario = Funcionario::findOrFail($id);
+
+        // Valida a requisição, e já mostra os erros se houverem (HttpCode: 422)
+        $this->validate($request, [
+            'nome_completo'   => 'required',
+            'sexo'            => 'required|in:f,m',
+            'email'           => sprintf('email|unique:funcionarios,email,%d,%s', $id, 'id'),
+            'cpf'             => sprintf('unique:funcionarios,cpf,%d,%s', $id, 'id'),
+            'data_nascimento' => 'date',
+            'linkedin'        => 'url',
+        ]);
+
         $funcionario->update($request->all());
 
         return response()->json($funcionario, 200);

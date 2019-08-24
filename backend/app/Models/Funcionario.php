@@ -13,6 +13,7 @@ class Funcionario extends Model
      */
     protected $fillable = [
         'nome_completo',
+        'sexo',
         'email',
         'cpf',
         'data_nascimento',

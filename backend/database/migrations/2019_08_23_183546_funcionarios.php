@@ -16,6 +16,7 @@ class Funcionarios extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
             $table->string('nome_completo');
+            $table->enum('sexo', ['f', 'm']);
             $table->string('email')->unique()->nullable();
             $table->string('cpf', 11)->unique();
             $table->date('data_nascimento')->nullable();
