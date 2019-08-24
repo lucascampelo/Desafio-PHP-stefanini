@@ -19,10 +19,21 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'funcionarios'], function() use ($router) {
 
+    // Rotas para "/funcionarios"
     $router->get('/', ['uses' => 'FuncionarioController@showAll']);
     $router->get('/{id}', ['uses' => 'FuncionarioController@show']);
     $router->post('/', ['uses' => 'FuncionarioController@create']);
     $router->delete('/{id}', ['uses' => 'FuncionarioController@delete']);
     $router->put('/{id}', ['uses' => 'FuncionarioController@update']);
+
+    $router->group(['prefix' => '{funcionarioId}/dependentes'], function() use ($router) {
+
+        // Rotas para "/funcionarios/{funcionarioId}/dependentes"
+        $router->get('/', ['uses' => 'DependenteController@showAll']);
+        $router->get('/{id}', ['uses' => 'DependenteController@show']);
+        $router->post('/', ['uses' => 'DependenteController@create']);
+        $router->delete('/{id}', ['uses' => 'DependenteController@delete']);
+        $router->put('/{id}', ['uses' => 'DependenteController@update']);
+    });
 
 });

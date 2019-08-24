@@ -4,9 +4,9 @@
  - [x] ~~Instalação do Lumen~~
  - [x] ~~Banco de Dados SQLite~~
  - [x] ~~Migrations~~
- - [ ] API RESTful
+ - [x] ~~API RESTful~~
    - [x] ~~CRUD de Funcionários~~
-   - [ ] CRUD de Dependentes
+   - [x] ~~CRUD de Dependentes~~
  - [ ] Swagger (desejável)
  - [ ] Teste **unitário** (avaliar o que deve ser testado)
  - [ ] Teste funcional para a API (desejável)

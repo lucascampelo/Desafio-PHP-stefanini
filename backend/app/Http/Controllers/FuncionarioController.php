@@ -26,7 +26,7 @@ class FuncionarioController extends Controller
      *
      * @return Funcionario
      */
-    public function show($id = null)
+    public function show($id)
     {
         if (empty($id)) {
             throw new NotFoundHttpException("Funcionário não encontrado");
@@ -75,7 +75,7 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
      */
-    public function delete($id = null)
+    public function delete($id)
     {
         Funcionario::findOrFail($id)->delete();
         return response([
@@ -92,7 +92,7 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id = null, Request $request)
+    public function update($id, Request $request)
     {
         $funcionario = Funcionario::findOrFail($id);
 
