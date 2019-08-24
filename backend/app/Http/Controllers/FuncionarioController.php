@@ -70,7 +70,7 @@ class FuncionarioController extends Controller
     /**
      * Apaga um funcionário do sistema
      *
-     * @param null $id ID do funcionário no Banco de Dados
+     * @param int $id ID do funcionário no Banco de Dados
      *
      * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
      */
@@ -81,5 +81,21 @@ class FuncionarioController extends Controller
             'success' => true,
             'message' => 'Funcionário apagado com sucesso.',
         ], 200);
+    }
+
+    /**
+     * Atualiza os dados de um funcionário
+     *
+     * @param int $id ID do funcionário no Banco de Dados
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update($id = null, Request $request)
+    {
+        $funcionario = Funcionario::findOrFail($id);
+        $funcionario->update($request->all());
+
+        return response()->json($funcionario, 200);
     }
 }

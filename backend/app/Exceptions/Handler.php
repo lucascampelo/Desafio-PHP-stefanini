@@ -60,6 +60,14 @@ class Handler extends ExceptionHandler
             ])->setStatusCode($httpCode);
         }
 
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'success' => false,
+                'status'  => 404,
+                'message' => 'Recurso não encontrado.',
+            ])->setStatusCode(404);
+        }
+
         return parent::render($request, $exception);
     }
 }
