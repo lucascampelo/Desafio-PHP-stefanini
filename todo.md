@@ -2,8 +2,8 @@
   
 ## Backend  
  - [x] ~~Instalação do Lumen~~
- - [ ] Banco de Dados SQLite
- - [ ] Migrations
+ - [x] ~~Banco de Dados SQLite~~
+ - [x] ~~Migrations~~
  - [ ] API RESTful
    - [ ] CRUD de Funcionários
    - [ ] CRUD de Dependentes

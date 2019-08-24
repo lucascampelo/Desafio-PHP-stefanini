@@ -22,5 +22,6 @@ $router->group(['prefix' => 'funcionarios'], function() use ($router) {
     $router->get('/', ['uses' => 'FuncionarioController@showAll']);
     $router->get('/{id}', ['uses' => 'FuncionarioController@show']);
     $router->post('/', ['uses' => 'FuncionarioController@create']);
+    $router->delete('/{id}', ['uses' => 'FuncionarioController@delete']);
 
 });

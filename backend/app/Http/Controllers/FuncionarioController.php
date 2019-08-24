@@ -45,7 +45,9 @@ class FuncionarioController extends Controller
      * Cria um novo Funcionário no Sistema
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
+     *
      * @throws ValidationException
      */
     public function create(Request $request)
@@ -63,5 +65,21 @@ class FuncionarioController extends Controller
         $funcionario = Funcionario::create($request->all());
 
         return response()->json($funcionario, 201);
+    }
+
+    /**
+     * Apaga um funcionário do sistema
+     *
+     * @param null $id ID do funcionário no Banco de Dados
+     *
+     * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
+     */
+    public function delete($id = null)
+    {
+        Funcionario::findOrFail($id)->delete();
+        return response([
+            'success' => true,
+            'message' => 'Funcionário apagado com sucesso.',
+        ], 200);
     }
 }
