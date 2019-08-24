@@ -7,6 +7,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
@@ -45,6 +46,20 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof HttpException) {
+            $httpCode = $exception->getCode() ?: 400;
+
+            if ($exception instanceof BadRequestHttpException) {
+                $httpCode = 500;
+            }
+
+            return response()->json([
+                'success' => false,
+                'status'  => $httpCode,
+                'message' => $exception->getMessage(),
+            ])->setStatusCode($httpCode);
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -20,5 +20,6 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'funcionarios'], function() use ($router) {
 
     $router->get('/', ['uses' => 'FuncionarioController@showAll']);
+    $router->get('/{id}', ['uses' => 'FuncionarioController@show']);
 
 });
