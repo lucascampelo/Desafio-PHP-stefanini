@@ -8,7 +8,7 @@
    - [x] ~~CRUD de Funcionários~~
    - [x] ~~CRUD de Dependentes~~
  - [ ] Swagger (desejável)
- - [ ] Teste **unitário** (avaliar o que deve ser testado)
+ - [x] ~~Teste **unitário** (avaliar o que deve ser testado)~~
  - [x] ~~Teste funcional para a API (desejável)~~
 
 ## Frontend
