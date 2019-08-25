@@ -1,5 +1,5 @@
-import axios from "axios";
-import {AxiosInstance} from "axios";
+import axios, {} from "axios";
+import {AxiosInstance, Method} from "axios";
 import {ErrorHandler} from "@angular/core";
 import {Injectable} from "@angular/core";
 
@@ -14,6 +14,7 @@ export interface Params {
 export interface GetOptions {
   url: string;
   params?: Params;
+  data?: any;
 }
 
 export interface ErrorResponse {
@@ -25,6 +26,7 @@ export interface ErrorResponse {
 @Injectable({
   providedIn: "root"
 })
+
 export class ApiClient {
 
   private axiosClient: AxiosInstance;
@@ -32,7 +34,6 @@ export class ApiClient {
 
   // I initialize the ApiClient.
   constructor(errorHandler: ErrorHandler) {
-
     this.errorHandler = errorHandler;
 
     // The ApiClient wraps calls to the underlying Axios client.
@@ -42,7 +43,6 @@ export class ApiClient {
         "X-Initialized-At": Date.now().toString()
       }
     });
-
   }
 
   // ---
@@ -51,23 +51,40 @@ export class ApiClient {
 
   // I perform a GET request with the given options.
   public async get<T>(options: GetOptions): Promise<T> {
-
     try {
-
-      var axiosResponse = await this.axiosClient.request<T>({
+      const axiosResponse = await this.axiosClient.request<T>({
         method: "get",
         url: options.url,
         params: options.params
       });
 
       return ( axiosResponse.data );
-
     } catch (error) {
-
       return ( Promise.reject(this.normalizeError(error)) );
-
     }
+  }
 
+  public async put<T>(options: GetOptions): Promise<T> {
+    try {
+      const axiosResponse = await this.abstractMethod('put', options);
+
+      return ( axiosResponse.data );
+    } catch (error) {
+      return ( Promise.reject(this.normalizeError(error)) );
+    }
+  }
+
+  private async abstractMethod<T>(method: Method, options: GetOptions): Promise<any> {
+    try {
+      return await this.axiosClient.request<T>({
+        method: method,
+        url: options.url,
+        params: options.params,
+        data: options.data,
+      });
+    } catch (error) {
+      return ( Promise.reject(this.normalizeError(error)) );
+    }
   }
 
   // ---
@@ -77,7 +94,6 @@ export class ApiClient {
   // Errors can occur for a variety of reasons. I normalize the error response so that
   // the calling context can assume a standard error structure.
   private normalizeError(error: any): ErrorResponse {
-
     this.errorHandler.handleError(error);
 
     // NOTE: Since I'm not really dealing with a production API, this doesn't really
@@ -87,7 +103,6 @@ export class ApiClient {
       code: "UnknownError",
       message: "An unexpected error occurred."
     });
-
   }
 
 }

@@ -1,25 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { ApiClient } from "../api-client";
 
-interface Dependente {
+export interface Dependente {
   "id": number,
   "funcionario_id": number,
   "nome_completo": string,
   "sexo": string,
   "cpf": string,
   "data_nascimento": string,
+  data_nascimento_formated: NgbDateStruct;
   "anotacoes": string,
   "created_at": string,
   "updated_at": string
 }
 
-interface Funcionario {
+export interface Funcionario {
   id: number;
   nome_completo: string;
   sexo: string;
   email: string;
   cpf: string;
   data_nascimento: string;
+  data_nascimento_formated: NgbDateStruct;
   linkedin: string;
   anotacoes: string;
   dependentes: Dependente[];
@@ -33,30 +37,40 @@ interface Funcionario {
   templateUrl: './funcionarios.component.html',
   styleUrls: ['./funcionarios.component.scss']
 })
-export class FuncionariosComponent implements OnInit {
+export class FuncionariosComponent {
 
   public funcionarios: Funcionario[];
 
-  private apiClient: ApiClient;
-
-  constructor(apiClient: ApiClient) {
-    this.apiClient = apiClient;
+  constructor(
+    private apiClient: ApiClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.funcionarios = [];
 
-    this.loadFuncionarios();
+    // Recarrega a lista de funcionários sempre que a URL abaixo for acionada
+    this.route.url.subscribe(() => {
+      if (this.router.url !== '/funcionarios') {
+        return;
+      }
+
+      this.loadFuncionarios();
+    });
   }
 
+  /**
+   * Carrega a lista de funcionários
+   *
+   * @returns {Promise<void>}
+   */
   public async loadFuncionarios() : Promise<void> {
     try {
-      this.funcionarios = await this.apiClient.get<Funcionario[]>({
+      let response = await this.apiClient.get<Funcionario[]>({
         url: '/funcionarios'
       });
+      this.funcionarios = response.reverse();
     } catch (error) {
       console.error(error);
     }
   }
-
-  ngOnInit() {
-  }
-
 }

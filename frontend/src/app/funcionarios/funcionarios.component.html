@@ -5,6 +5,8 @@
   </div>
 </div>
 
+<router-outlet></router-outlet>
+
 <div class="row mt-4">
   <div class="col-12">
 
@@ -19,14 +21,14 @@
         <thead>
           <tr>
             <th>Nome Completo</th>
-            <th>Sexo</th>
+            <th class="text-center">Sexo</th>
             <th>E-mail</th>
-            <th>CPF</th>
-            <th>Data de Nascimento</th>
-            <th>Linkedin</th>
-            <th>Dependentes</th>
-            <th>Criado em</th>
-            <th>Atualizado em</th>
+            <th class="text-center">CPF</th>
+            <th class="text-center">Data de Nascimento</th>
+            <th class="text-center">Linkedin</th>
+            <th class="text-center">Dependentes</th>
+            <th>Última atualização</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -46,8 +48,10 @@
               </a>
             </td>
             <td class="text-center">{{funcionario.dependentes.length}}</td>
-            <td>{{funcionario.created_at | date:'short'}}</td>
             <td>{{funcionario.updated_at | date:'short'}}</td>
+            <td>
+              <a [routerLink]="['/funcionarios/editar', funcionario.id]" class="btn btn-sm btn-secondary">Editar</a>
+            </td>
           </tr>
         </tbody>
       </table>

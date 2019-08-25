@@ -1,0 +1,63 @@
+<ng-template #content let-modal>
+  <form #funcionarioForm="ngForm" ngNativeValidate (submit)="salvar()">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="form-group col-12">
+          <label for="input-nome_completo">Nome completo *</label>
+          <input id="input-nome_completo" class="form-control" name="nome_completo" [(ngModel)]="model.nome_completo"
+                 required>
+        </div>
+        <div class="form-group col-4">
+          <label for="input-sexo">Sexo *</label>
+          <select id="input-sexo" class="form-control" name="sexo" [(ngModel)]="model.sexo" required>
+            <option disabled>Escolha</option>
+            <option value="f">Feminino</option>
+            <option value="m">Masculino</option>
+          </select>
+        </div>
+        <div class="form-group col-8">
+          <label for="input-email">E-mail</label>
+          <input id="input-email" class="form-control" name="email" [(ngModel)]="model.email">
+        </div>
+        <div class="form-group col-4">
+          <label for="input-cpf">CPF *</label>
+          <input id="input-cpf" class="form-control" name="cpf" [(ngModel)]="model.cpf" required minlength="11">
+        </div>
+        <div class="form-group col-4">
+          <label for="input-data_nascimento">Data de Nascimento</label>
+          <div class="input-group">
+            <input id="input-data_nascimento" class="form-control" name="data_nascimento"
+                   [(ngModel)]="model.data_nascimento_formated"
+                   ngbDatepicker #dp="ngbDatepicker"
+                   placeholder="yyyy-mm-dd"
+            >
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">
+                <i class="material-icons small">calendar_today</i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <label for="input-linkedin">Linkedin</label>
+          <input id="input-linkedin" class="form-control" name="linkedin" [(ngModel)]="model.linkedin">
+        </div>
+        <div class="form-group col-12">
+          <label for="input-anotacoes">Anotações</label>
+          <textarea id="input-anotacoes" class="form-control" name="anotacoes" [(ngModel)]="model.anotacoes"></textarea>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success">Salvar</button>
+    </div>
+  </form>
+</ng-template>
