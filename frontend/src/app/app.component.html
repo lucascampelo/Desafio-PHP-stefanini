@@ -1,0 +1,26 @@
+<header class="navbar navbar-expand navbar-dark px-4 flex-column flex-md-row bg-primary fixed-top">
+  <a aria-label="NG Bootstrap" class="navbar-brand p-0 mr-2" href="/">
+    <img src="https://avatars2.githubusercontent.com/u/1775353?s=460&v=4" class="img-fluid" style="width: 46px;height: 46px;border-radius: 50%;">
+  </a>
+
+  <span class="text-white">Desafio PHP</span>
+
+  <button aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"
+          class="navbar-toggler navbar-toggler-right" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</header>
+
+<div class="container-fluid content-wrap">
+  <div class="row">
+    <div app-sidebar></div>
+
+    <main class="content col-12 col-md-9 col-xl-10 py-md-3" role="main">
+      <section class="container-fluid">
+        <div class="content">
+          <router-outlet></router-outlet>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

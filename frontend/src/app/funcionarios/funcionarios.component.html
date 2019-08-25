@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-12">
+    <h4 class="d-inline-block" style="vertical-align: text-top;">Lista de Funcionários</h4>
+    <a routerLink="/funcionarios/novo" class="btn btn-success btn-sm ml-2">Cadastrar novo</a>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+
+    <ng-template [ngIf]="!funcionarios.length">
+      <div class="m-5 text-center">
+        <app-loader></app-loader>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="funcionarios.length">
+      <table class="table table-hover table-borderless">
+        <thead>
+          <tr>
+            <th>Nome Completo</th>
+            <th>Sexo</th>
+            <th>E-mail</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Linkedin</th>
+            <th>Dependentes</th>
+            <th>Criado em</th>
+            <th>Atualizado em</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let funcionario of funcionarios">
+            <td>{{funcionario.nome_completo}}</td>
+            <td class="text-center">{{funcionario.sexo | uppercase}}</td>
+            <td>{{funcionario.email}}</td>
+            <td class="text-center">{{funcionario.cpf}}</td>
+            <td class="text-center">{{funcionario.data_nascimento | date:'shortDate'}}</td>
+            <td class="text-center">
+              <a class="text-success"
+                 *ngIf="funcionario.linkedin"
+                 [href]="funcionario.linkedin"
+                 target="_blank"
+              >
+                Sim
+              </a>
+            </td>
+            <td class="text-center">{{funcionario.dependentes.length}}</td>
+            <td>{{funcionario.created_at | date:'short'}}</td>
+            <td>{{funcionario.updated_at | date:'short'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+
+  </div>
+</div>
