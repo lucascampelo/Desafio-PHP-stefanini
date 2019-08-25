@@ -29,7 +29,7 @@ class FuncionarioController extends Controller
     public function show($id)
     {
         if (empty($id)) {
-            throw new NotFoundHttpException("Funcionário não encontrado");
+            throw new NotFoundHttpException("Funcionário não encontrado.");
         }
 
         try {
@@ -37,7 +37,7 @@ class FuncionarioController extends Controller
             $funcionario = Funcionario::findOrFail($id);
             return $funcionario;
         } catch (ModelNotFoundException $e) {
-            throw new NotFoundHttpException("Funcionário não encontrado", $e, 404);
+            throw new NotFoundHttpException("Funcionário não encontrado.", $e, 404);
         }
     }
 

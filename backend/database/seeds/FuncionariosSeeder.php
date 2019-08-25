@@ -15,7 +15,14 @@ class FuncionariosSeeder extends Seeder
      */
     public function run(Faker\Generator $faker)
     {
-        factory(Funcionario::class, 50)->create()->each(function(Funcionario $funcionario) use ($faker) {
+        /*
+         * Se for ambiente de testes, gera somente 10 registros de funcionários (para acelerar os testes).
+         * Caso contrário, gera 50 registros.
+         */
+        $totalRegistros = env('APP_ENV', 'local') === 'testing' ? 10 : 50;
+
+        factory(Funcionario::class, $totalRegistros)->create()->each(function(Funcionario $funcionario) use ($faker) {
+            // Pra cada funcionário é gerado de 0 a 3 dependentes, aleatóriamente
             $quantidade = $faker->numberBetween(0, 3);
             $depententes = factory(Dependente::class, $quantidade)->make();
 

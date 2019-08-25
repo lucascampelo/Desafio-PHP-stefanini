@@ -9,8 +9,7 @@
    - [x] ~~CRUD de Dependentes~~
  - [ ] Swagger (desejável)
  - [ ] Teste **unitário** (avaliar o que deve ser testado)
- - [ ] Teste funcional para a API (desejável)
- - [ ] Teste da camada de Serviço ? (desejável)
+ - [x] ~~Teste funcional para a API (desejável)~~
 
 ## Frontend
  - [ ] Instalação do Angular e Bootstrap
