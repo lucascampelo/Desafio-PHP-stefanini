@@ -58,4 +58,14 @@ class Funcionario extends Model
 
         return $dependentes->getResults();
     }
+
+    /**
+     * Formata a data no formato ISO8601, no output do serviço.
+     * @param \DateTimeInterface $date
+     * @return string
+     */
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->toIso8601String();
+    }
 }
