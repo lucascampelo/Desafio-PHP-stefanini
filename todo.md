@@ -15,7 +15,7 @@
  - [x] ~~Instalação do Angular e Bootstrap~~
  - [x] ~~CRUD de Funcionários~~
  - [x] ~~CRUD de Dependentes~~
- - [ ] Teste **unitário** (avaliar o que deve ser testado)
+ - [x] ~~Teste **unitário** (avaliar o que deve ser testado)~~
  - [ ] Teste de Interface com Jasmine e Selenium (desejável)
 
 ## Outros

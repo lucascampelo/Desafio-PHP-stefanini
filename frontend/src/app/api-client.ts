@@ -1,4 +1,4 @@
-import axios, {} from "axios";
+import axios from "axios";
 import {AxiosInstance, Method} from "axios";
 import {ErrorHandler} from "@angular/core";
 import {Injectable} from "@angular/core";
@@ -112,6 +112,15 @@ export class ApiClient {
     } catch (error) {
       return ( Promise.reject(this.normalizeError(error)) );
     }
+  }
+
+  /**
+   * Retorna a instância do axios utilizada na ApiClient
+   *
+   * @returns {AxiosInstance}
+   */
+  public getAxiosInstance(): AxiosInstance {
+    return this.axiosClient;
   }
 
   /**
