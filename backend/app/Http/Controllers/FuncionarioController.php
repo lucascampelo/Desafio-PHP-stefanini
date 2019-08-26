@@ -58,8 +58,8 @@ class FuncionarioController extends Controller
             'sexo'            => 'required|in:f,m',
             'email'           => 'email|unique:funcionarios',
             'cpf'             => 'unique:funcionarios',
-            'data_nascimento' => 'date',
-            'linkedin'        => 'url',
+            'data_nascimento' => 'nullable|date',
+            'linkedin'        => 'nullable|url',
         ]);
 
         /** @var Funcionario $funcionario */
@@ -102,8 +102,8 @@ class FuncionarioController extends Controller
             'sexo'            => 'required|in:f,m',
             'email'           => sprintf('email|unique:funcionarios,email,%d,%s', $id, 'id'),
             'cpf'             => sprintf('unique:funcionarios,cpf,%d,%s', $id, 'id'),
-            'data_nascimento' => 'date',
-            'linkedin'        => 'url',
+            'data_nascimento' => 'nullable|date',
+            'linkedin'        => 'nullable|url',
         ]);
 
         $funcionario->update($request->all());

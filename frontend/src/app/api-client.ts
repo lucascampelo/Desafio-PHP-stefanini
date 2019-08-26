@@ -74,6 +74,16 @@ export class ApiClient {
     }
   }
 
+  public async post<T>(options: GetOptions): Promise<T> {
+    try {
+      const axiosResponse = await this.abstractMethod('post', options);
+
+      return ( axiosResponse.data );
+    } catch (error) {
+      return ( Promise.reject(this.normalizeError(error)) );
+    }
+  }
+
   private async abstractMethod<T>(method: Method, options: GetOptions): Promise<any> {
     try {
       return await this.axiosClient.request<T>({

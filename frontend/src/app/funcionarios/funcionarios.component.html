@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <h4 class="d-inline-block" style="vertical-align: text-top;">Lista de Funcionários</h4>
-    <a routerLink="/funcionarios/novo" class="btn btn-success btn-sm ml-2">Cadastrar novo</a>
+    <a routerLink="/funcionarios/cadastrar" class="btn btn-success btn-sm ml-2">Cadastrar novo</a>
   </div>
 </div>
 
@@ -46,6 +46,9 @@
               >
                 Sim
               </a>
+              <span *ngIf="!funcionario.linkedin">
+                Não
+              </span>
             </td>
             <td class="text-center">{{funcionario.dependentes.length}}</td>
             <td>{{funcionario.updated_at | date:'short'}}</td>

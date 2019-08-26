@@ -1,16 +1,16 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import {Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import {Funcionario} from '../funcionarios/funcionarios.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router, ActivatedRoute} from "@angular/router";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Funcionario } from '../funcionarios/funcionarios.component';
-import { ApiClient } from '../api-client';
-import { convertISO8601ToDataStruct, convertDataStructToISO8601 } from '../utils';
+import {convertDataStructToISO8601} from "../utils";
+import {ApiClient} from "../api-client";
 
 @Component({
-  selector: 'app-funcionario-editar',
-  templateUrl: '../funcionario-cadastrar/funcionario-cadastrar.component.html',
-  styleUrls: ['../funcionario-cadastrar/funcionario-cadastrar.component.scss']
+  selector: 'app-funcionario-cadastrar',
+  templateUrl: './funcionario-cadastrar.component.html',
+  styleUrls: ['./funcionario-cadastrar.component.scss']
 })
-export class FuncionarioEditarComponent implements AfterViewInit {
+export class FuncionarioCadastrarComponent implements AfterViewInit {
   @ViewChild('content', {'static': false}) content: ElementRef;
 
   model: Funcionario;
@@ -23,6 +23,7 @@ export class FuncionarioEditarComponent implements AfterViewInit {
     private apiClient: ApiClient
   ) {
     this.title = 'Funcionário';
+    this.model = <Funcionario>{};
   }
 
   /**
@@ -46,12 +47,12 @@ export class FuncionarioEditarComponent implements AfterViewInit {
     // Salva, as informações
 
     // Converte a data do Datepicker
-    if (this.model.data_nascimento) {
+    if (this.model.data_nascimento_formated) {
       this.model.data_nascimento = convertDataStructToISO8601(this.model.data_nascimento_formated, true);
     }
 
-    await this.apiClient.put({
-      url: `/funcionarios/${this.model.id}`,
+    await this.apiClient.post({
+      url: '/funcionarios',
       data: this.model
     }).then(() => {
       // @todo colocar um $toast
@@ -66,28 +67,17 @@ export class FuncionarioEditarComponent implements AfterViewInit {
   }
 
   /**
-   * Carrega as informações do Funcionário para a Modal
+   * Abre a modal para cadastrar o funcionário
    *
    * @returns {Promise<void>}
    */
-  async ngAfterViewInit() {
+  ngAfterViewInit() {
     // Carrega o Título da rota para ser utilizado na View
     this.route.data.subscribe((data: { title: string }) => {
       this.title = data.title;
     });
 
-    const id = this.route.snapshot.paramMap.get('funcionario_id'),
-      funcionario = await this.apiClient.get<Funcionario>({
-        url: `/funcionarios/${id}`,
-      });
-
-    // Converte a data para o Datepicker
-    if (funcionario.data_nascimento) {
-      funcionario.data_nascimento_formated = convertISO8601ToDataStruct(funcionario.data_nascimento);
-    }
-
-    this.model = funcionario;
-
     this.open(this.content);
   }
+
 }

@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { FuncionariosComponent } from './funcionarios/funcionarios.component';
 import { LoaderComponent } from './loader/loader.component';
 import { FuncionarioEditarComponent } from './funcionario-editar/funcionario-editar.component';
+import { FuncionarioCadastrarComponent } from './funcionario-cadastrar/funcionario-cadastrar.component';
 
 registerLocaleData(localeBr, 'pt');
 
@@ -23,6 +24,7 @@ registerLocaleData(localeBr, 'pt');
     HomeComponent,
     FuncionariosComponent,
     FuncionarioEditarComponent,
+    FuncionarioCadastrarComponent,
   ],
   imports: [
     BrowserModule,
