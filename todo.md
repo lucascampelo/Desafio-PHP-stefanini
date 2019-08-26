@@ -20,6 +20,6 @@
 
 ## Outros
  - [ ] Ambiente em containers
- - [ ] Publicar no GitHub
- - [ ] `Readme.md` com as devidas explicações e orientações
+ - [x] ~~Publicar no GitHub~~
+ - [x] ~~`Readme.md` com as devidas explicações e orientações~~
 
