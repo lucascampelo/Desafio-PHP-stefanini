@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core";
 
 // ----------------------------------------------------------------------------------- //
 // ----------------------------------------------------------------------------------- //
-axios.defaults.baseURL = 'http://api.desafio-stefanini.local/';
+axios.defaults.baseURL = 'http://localhost:8080/';
 
 export interface Params {
   [ key: string ]: any;

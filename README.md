@@ -21,7 +21,7 @@ Navegue para a pasta `backend` e rode os comandos a seguir.
 
 Instalação das dependências:
 ```shell
-$ composer install
+$ composer install && composer run-script post-root-package-install
 ```
 
 Criar a estrutura do banco de dados:
