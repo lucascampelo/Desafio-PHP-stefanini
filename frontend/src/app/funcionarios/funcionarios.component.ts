@@ -58,7 +58,13 @@ export class FuncionariosComponent {
     });
   }
 
-  async apagar(funcionario: Funcionario) {
+  /**
+   * Apaga um Funcionário
+   *
+   * @param funcionario
+   * @returns {Promise<void>}
+   */
+  async apagar(funcionario: Funcionario): Promise<void> {
     if (!confirm(`Tem certeza que deseja apagar o funcionário "${funcionario.nome_completo}" ?`)) {
       return;
     }

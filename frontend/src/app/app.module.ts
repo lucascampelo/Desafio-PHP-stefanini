@@ -8,11 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoaderComponent } from './loader/loader.component';
 import { HomeComponent } from './home/home.component';
 import { FuncionariosComponent } from './funcionarios/funcionarios.component';
-import { LoaderComponent } from './loader/loader.component';
 import { FuncionarioEditarComponent } from './funcionario-editar/funcionario-editar.component';
 import { FuncionarioCadastrarComponent } from './funcionario-cadastrar/funcionario-cadastrar.component';
+import { DependentesComponent } from './dependentes/dependentes.component';
+import { DependenteEditarComponent } from './dependente-editar/dependente-editar.component';
+import { DependenteCadastrarComponent } from './dependente-cadastrar/dependente-cadastrar.component';
 
 registerLocaleData(localeBr, 'pt');
 
@@ -25,6 +28,9 @@ registerLocaleData(localeBr, 'pt');
     FuncionariosComponent,
     FuncionarioEditarComponent,
     FuncionarioCadastrarComponent,
+    DependentesComponent,
+    DependenteEditarComponent,
+    DependenteCadastrarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,19 +1,19 @@
 import {Component, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
-import {Funcionario} from '../funcionarios/funcionarios.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router, ActivatedRoute} from "@angular/router";
-import {convertDataStructToISO8601} from "../utils";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ApiClient} from "../api-client";
+import {Dependente} from "../funcionarios/funcionarios.component";
+import {convertDataStructToISO8601} from "../utils";
 
 @Component({
-  selector: 'app-funcionario-cadastrar',
-  templateUrl: './funcionario-cadastrar.component.html',
-  styleUrls: ['./funcionario-cadastrar.component.scss']
+  selector: 'app-dependente-cadastrar',
+  templateUrl: './dependente-cadastrar.component.html',
+  styleUrls: ['./dependente-cadastrar.component.scss']
 })
-export class FuncionarioCadastrarComponent implements AfterViewInit {
+export class DependenteCadastrarComponent implements AfterViewInit {
   @ViewChild('content', {'static': false}) content: ElementRef;
 
-  model: Funcionario;
+  model: Dependente;
   title: string;
 
   constructor(
@@ -22,41 +22,43 @@ export class FuncionarioCadastrarComponent implements AfterViewInit {
     private route: ActivatedRoute,
     private apiClient: ApiClient
   ) {
-    this.title = 'Funcionário';
-    this.model = <Funcionario>{};
+    this.title = 'Dependente';
+    this.model = <Dependente>{};
   }
 
   /**
-   * Abre a modal para a Edição de um Funcionário
+   * Abre a modal para a Edição de um Dependente
    *
    * @param content
    */
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then(() => {}, () => {
+      const funcionario_id = this.route.parent.snapshot.paramMap.get('funcionario_id');
       // Cancela a operação
-      this.router.navigate(['/funcionarios']);
+      this.router.navigate(['/funcionarios', funcionario_id, 'dependentes']);
     });
   }
 
   /**
-   * Salva as informações do Formulário de Funcionário, e volta para a Lista de Funcionários
+   * Salva as informações do Formulário de Dependente, e volta para a Lista de Dependentes
    *
    * @returns {Promise<boolean>}
    */
   async salvar(): Promise<void> {
-    // Salva, as informações
+    // Salva as informações
 
     // Converte a data do Datepicker
     if (this.model.data_nascimento_formated) {
       this.model.data_nascimento = convertDataStructToISO8601(this.model.data_nascimento_formated, true);
     }
 
+    const funcionario_id = this.route.parent.snapshot.paramMap.get('funcionario_id');
     await this.apiClient.post({
-      url: '/funcionarios',
+      url: `/funcionarios/${funcionario_id}/dependentes`,
       data: this.model
     }).then(() => {
       // @todo colocar um $toast
-      this.router.navigate(['/funcionarios']);
+      this.router.navigate(['/funcionarios', funcionario_id, 'dependentes']);
       this.modalService.dismissAll();
     }, error => {
       // @todo Tratamento de Validações de erro
@@ -65,9 +67,7 @@ export class FuncionarioCadastrarComponent implements AfterViewInit {
   }
 
   /**
-   * Abre a modal para cadastrar o funcionário
-   *
-   * @returns {Promise<void>}
+   * Abre a modal ao carregar o componente e atualiza o Título
    */
   ngAfterViewInit() {
     // Carrega o Título da rota para ser utilizado na View

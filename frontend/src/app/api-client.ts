@@ -36,12 +36,9 @@ export class ApiClient {
   constructor(errorHandler: ErrorHandler) {
     this.errorHandler = errorHandler;
 
-    // The ApiClient wraps calls to the underlying Axios client.
+    // Configurações do Axios
     this.axiosClient = axios.create({
-      timeout: 3000,
-      headers: {
-        "X-Initialized-At": Date.now().toString()
-      }
+      timeout: 3000
     });
   }
 
@@ -49,7 +46,12 @@ export class ApiClient {
   // PUBLIC METHODS.
   // ---
 
-  // I perform a GET request with the given options.
+  /**
+   * Realiza uma requisição GET
+   *
+   * @param options
+   * @returns {Promise<never>}
+   */
   public async get<T>(options: GetOptions): Promise<T> {
     try {
       const axiosResponse = await this.axiosClient.request<T>({
@@ -64,6 +66,12 @@ export class ApiClient {
     }
   }
 
+  /**
+   * Realiza uma requisição PUT
+   *
+   * @param options
+   * @returns {Promise<never>}
+   */
   public async put<T>(options: GetOptions): Promise<T> {
     try {
       const axiosResponse = await this.abstractMethod('put', options);
@@ -74,6 +82,12 @@ export class ApiClient {
     }
   }
 
+  /**
+   * Realiza uma requisição POST
+   *
+   * @param options
+   * @returns {Promise<never>}
+   */
   public async post<T>(options: GetOptions): Promise<T> {
     try {
       const axiosResponse = await this.abstractMethod('post', options);
@@ -84,6 +98,12 @@ export class ApiClient {
     }
   }
 
+  /**
+   * Realiza uma requisição DELETE
+   *
+   * @param options
+   * @returns {Promise<never>}
+   */
   public async delete<T>(options: GetOptions): Promise<T> {
     try {
       const axiosResponse = await this.abstractMethod('delete', options);
@@ -94,6 +114,13 @@ export class ApiClient {
     }
   }
 
+  /**
+   * Método utilizado para encapsular e reaproveitar o código.
+   *
+   * @param method
+   * @param options
+   * @returns {Promise<any>}
+   */
   private async abstractMethod<T>(method: Method, options: GetOptions): Promise<any> {
     try {
       return await this.axiosClient.request<T>({
@@ -111,13 +138,9 @@ export class ApiClient {
   // PRIVATE METHODS.
   // ---
 
-  // Errors can occur for a variety of reasons. I normalize the error response so that
-  // the calling context can assume a standard error structure.
   private normalizeError(error: any): ErrorResponse {
     this.errorHandler.handleError(error);
 
-    // NOTE: Since I'm not really dealing with a production API, this doesn't really
-    // normalize anything (ie, this is not the focus of this demo).
     return ({
       id: "-1",
       code: "UnknownError",

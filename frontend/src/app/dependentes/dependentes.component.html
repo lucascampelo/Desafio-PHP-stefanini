@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-12">
+    <h4 class="d-inline-block" style="vertical-align: text-top;">Lista de Dependentes</h4>
+    <a [routerLink]="['cadastrar']" class="btn btn-success btn-sm ml-2">Cadastrar novo</a>
+
+    <h6 *ngIf="funcionario">
+      Funcionário:
+      <span class="text-primary">{{funcionario.nome_completo}}</span>
+    </h6>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<div class="row mt-4">
+  <div class="col-12">
+
+    <ng-template [ngIf]="!funcionario">
+      <div class="m-5 text-center">
+        <app-loader></app-loader>
+      </div>
+    </ng-template>
+
+
+    <ng-template [ngIf]="funcionario">
+      <table class="table table-hover table-borderless">
+        <thead>
+        <tr>
+          <th>Nome Completo</th>
+          <th class="text-center">Sexo</th>
+          <th class="text-center">CPF</th>
+          <th class="text-center">Data de Nascimento</th>
+          <th>Última atualização</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let dependente of funcionario.dependentes">
+          <td>{{dependente.nome_completo}}</td>
+          <td class="text-center">{{dependente.sexo | uppercase}}</td>
+          <td class="text-center">{{dependente.cpf}}</td>
+          <td class="text-center">{{dependente.data_nascimento | date:'shortDate'}}</td>
+          <td>{{dependente.updated_at | date:'short'}}</td>
+          <td width="300px">
+            <a [routerLink]="['editar', dependente.id]" class="btn btn-sm btn-secondary">Editar</a>
+            <button class="btn btn-sm btn-outline-danger ml-1" (click)="apagar(dependente)">Apagar</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-template>
+
+  </div>
+</div>

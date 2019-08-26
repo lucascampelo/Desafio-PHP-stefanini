@@ -61,8 +61,6 @@ export class FuncionarioEditarComponent implements AfterViewInit {
       // @todo Tratamento de Validações de erro
       console.error(error);
     });
-
-    return false;
   }
 
   /**
