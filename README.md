@@ -6,10 +6,10 @@ Você pode ver a minha lista pessoal de itens a fazer em [`todo.md`](./todo.md).
 
 ## Tecnologias e Versões
 - PHP 7.3.8
-	- Lumen 5.8.12
+   - Lumen 5.8.12
 - Node 10.16.3
-	- Angular 8.2.3
-	- Twitter Bootstrap 4.3.1
+   - Angular 8.2.3
+   - Twitter Bootstrap 4.3.1
 - SQLite 3
 
 Vários outros pacotes foram utilizados. Para mais detalhes de versões e bibliotecas utilizadas, consulte os arquivos `composer.lock` e `package-lock.json` no repositório.
@@ -23,6 +23,10 @@ Instalação das dependências:
 ```shell
 $ composer install && composer run-script post-root-package-install
 ```
+  Abra o arquivo `.env` e coloque o caminho completo para a variável de ambiente `DB_DATABASE`, por exemplo:
+  ```
+  DB_DATABASE="/caminho/completo/para/aplicacao/Desafio-PHP-stefanini/database/database.sqlite"
+  ```
 
 Criar a estrutura do banco de dados:
 ```shell
@@ -43,7 +47,7 @@ Mantenha este terminal aberto.
 ### Frontend
 Abra outro  para o **frontend**, navegue para a pasta `frontend` e rode o comando abaixo:
 ```shell
-$ npm install	
+$ npm install
 ```
 
 E para iniciar a navegação na interface web, rode o comando:
@@ -64,3 +68,10 @@ Na pasta `frontend` (siga as instruções do terminal):
 ```shell
 $ npm run test
 ```
+
+## Considerações finais
+Apesar do prazo de entrega ser dia 28/08, a partir de segunda-feira 26/08 eu não estarei em Brasília, temporariamente. Neste caso, me dediquei o máximo que pude para entregar tudo até segunda-feira pela manhã.
+Gostaria de ter mais tempo para entregar tudo, tenho certeza que tenho capacidade técnica para tal, mas infelizmente meu prazo foi muito curto. Espero que compreendam.
+
+Grato,
+Lucas Campelo.
