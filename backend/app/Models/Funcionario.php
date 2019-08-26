@@ -60,6 +60,21 @@ class Funcionario extends Model
     }
 
     /**
+     * Formata somente o campo "data_nascimento" como yyyy-mm-dd
+     * @param $dateString
+     *
+     * @return string|null
+     */
+    public function getDataNascimentoAttribute($dateString)
+    {
+        if (!$dateString) {
+            return;
+        }
+
+        return substr($dateString, 0, 10);
+    }
+
+    /**
      * Formata a data no formato ISO8601, no output do serviço.
      * @param \DateTimeInterface $date
      * @return string
