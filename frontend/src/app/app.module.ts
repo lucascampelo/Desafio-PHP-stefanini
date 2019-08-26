@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { registerLocaleData, APP_BASE_HREF } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import localeBr from '@angular/common/locales/pt';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -25,21 +25,23 @@ registerLocaleData(localeBr, 'pt');
     SidebarComponent,
     LoaderComponent,
     HomeComponent,
-    FuncionariosComponent,
-    FuncionarioEditarComponent,
     FuncionarioCadastrarComponent,
-    DependentesComponent,
-    DependenteEditarComponent,
+    FuncionarioEditarComponent,
+    FuncionariosComponent,
     DependenteCadastrarComponent,
+    DependenteEditarComponent,
+    DependentesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pt' }
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: APP_BASE_HREF, useValue: '/' },
   ],
   bootstrap: [AppComponent]
 })
