@@ -13,7 +13,7 @@
 
 ## Frontend
  - [x] ~~Instalação do Angular e Bootstrap~~
- - [ ] CRUD de Funcionários
+ - [x] ~~CRUD de Funcionários~~
  - [ ] CRUD de Dependentes
  - [ ] Teste **unitário** (avaliar o que deve ser testado)
  - [ ] Teste de Interface com Jasmine e Selenium (desejável)

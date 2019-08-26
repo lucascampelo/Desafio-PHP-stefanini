@@ -58,6 +58,17 @@ export class FuncionariosComponent {
     });
   }
 
+  async apagar(funcionario: Funcionario) {
+    if (!confirm(`Tem certeza que deseja apagar o funcionário "${funcionario.nome_completo}" ?`)) {
+      return;
+    }
+
+    await this.apiClient.delete({
+      url: `/funcionarios/${funcionario.id}`
+    });
+    this.loadFuncionarios();
+  }
+
   /**
    * Carrega a lista de funcionários
    *

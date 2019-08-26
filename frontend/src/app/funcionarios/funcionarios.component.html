@@ -54,6 +54,7 @@
             <td>{{funcionario.updated_at | date:'short'}}</td>
             <td>
               <a [routerLink]="['/funcionarios/editar', funcionario.id]" class="btn btn-sm btn-secondary">Editar</a>
+              <button class="btn btn-sm btn-outline-danger ml-1" (click)="apagar(funcionario)">Apagar</button>
             </td>
           </tr>
         </tbody>
