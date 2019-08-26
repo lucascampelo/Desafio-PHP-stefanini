@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <h4 class="d-inline-block" style="vertical-align: text-top;">Lista de Funcionários</h4>
-    <a (routerLink)="['cadastrar']" class="btn btn-success btn-sm ml-2">Cadastrar novo</a>
+    <a [routerLink]="['cadastrar']" class="btn btn-success btn-sm ml-2">Cadastrar novo</a>
   </div>
 </div>
 
@@ -53,9 +53,9 @@
             <td class="text-center">{{funcionario.dependentes.length}}</td>
             <td>{{funcionario.updated_at | date:'short'}}</td>
             <td width="300px">
-              <a (routerLink)="['/funcionarios/editar', funcionario.id]" class="btn btn-sm btn-secondary">Editar</a>
+              <a [routerLink]="['/funcionarios/editar', funcionario.id]" class="btn btn-sm btn-secondary">Editar</a>
               <button class="btn btn-sm btn-outline-danger ml-1" (click)="apagar(funcionario)">Apagar</button>
-              <a (routerLink)="[funcionario.id, 'dependentes']" class="btn btn-sm btn-link ml-1">Ver dependentes</a>
+              <a [routerLink]="[funcionario.id, 'dependentes']" class="btn btn-sm btn-link ml-1">Ver dependentes</a>
             </td>
           </tr>
         </tbody>
